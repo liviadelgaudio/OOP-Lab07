@@ -27,39 +27,31 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport SOCCER;
+    public static final Sport SOCCER = new Sport("Soccer");;
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport F1;
+    public static final Sport F1 = new Sport("Formula 1");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport MOTOGP;
+    public static final Sport MOTOGP = new Sport("Moto GP");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport VOLLEY;
+    public static final Sport VOLLEY = new Sport("Volleyball");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport BASKET;
+    public static final Sport BASKET = new Sport("Basketball");
     /**
      * Static {@link Sport} constant.
      */
-    public static final Sport BIKE;
+    public static final Sport BIKE = new Sport("Bike Racing");
 
     /*
      * TODO: initialize properly these sports
      */
-    static {
-        SOCCER = null;
-        F1 = null;
-        MOTOGP = null;
-        VOLLEY = null;
-        BASKET = null;
-        BIKE = null;
-    }
 
     /**
      * Field meant to keep track of the set of sports followed/done by a user.
@@ -114,7 +106,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public void addSport(final Sport sport) {
-
+    	this.sports.add(sport);
     }
 
     /**
@@ -126,7 +118,7 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      */
     // TODO
     public boolean hasSport(final Sport s) {
-        return false;
+    	return this.sports.contains(s);
     }
 
     /*
@@ -136,6 +128,12 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
      * with its bare name.
      */
     public static final class Sport {
+    	
+    	private final String name;
+    	
+    	public Sport(String sport) {
+			this.name = sport;
+    	}
         /*
          * TODO
          * 
@@ -143,8 +141,20 @@ public class SportSocialNetworkUserImpl<U extends User> extends SocialNetworkUse
          * very same name. Remember that you must also redefine hashCode()!
          */
         @Override
-        public boolean equals(final Object o) {
-            return false;
-        }
+        public boolean equals(final Object obj) {
+        	if (this == obj)
+				return true;
+			if (obj == null)
+				return false;
+			if (getClass() != obj.getClass())
+				return false;
+			Sport other = (Sport) obj;
+			if (name == null) {
+				if (other.name != null)
+					return false;
+			} else if (!name.equals(other.name))
+				return false;
+			return true;
+		}
     }
 }
